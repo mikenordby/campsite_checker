@@ -2,7 +2,8 @@ name: Campsite Checker
 
 on:
   schedule:
-    - cron: '0 * * * *'  # Every hour
+    - cron: '1 13-23 * * *'  # 1 min past each hour 6 AM to 4 PM MT
+    - cron: '1 0-5 * * *'    # 1 min past each hour 5 PM to 10 PM MT
   workflow_dispatch:     # Manual trigger
 
 jobs:
@@ -23,7 +24,7 @@ jobs:
 
     - name: Run the bot
       env:
-        GMAIL_ADDRESS: mikenordby9@gmail.com
+        GMAIL_ADDRESS: ${{ secrets.GMAIL_ADDRESS }}
         GMAIL_APP_PASSWORD: ${{ secrets.GMAIL_APP_PASSWORD }}
-        YOUR_PHONE_NUMBER: 6514345915
+        PHONE_NUMBER: ${{ secrets.PHONE_NUMBER }}
       run: python campsite_bot.py
